@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "todo app server",
+  "description": "TODOapp webapplication",
   "main": "index.js",
   "repository": "git@github.com:reverb6821/todo-app.git",
   "author": "reverb6821 <giuseppegigliottidev@gmail.com>",

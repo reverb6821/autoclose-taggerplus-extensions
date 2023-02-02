@@ -40,4 +40,30 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.user = require('./user.model')(sequelize, Sequelize)
+db.role = require('./role.model')(sequelize, Sequelize)
+db.userRoles = require('./user-roles.model')(sequelize, Sequelize)
+db.refreshToken = require("./refreshToken.model.js")(sequelize, Sequelize);
+
+db.task = require('./task.model')(sequelize, Sequelize)
+db.task = require('./label.model')(sequelize, Sequelize)
+
+db.role.belongsToMany(db.user, {
+  through: db.userRoles,
+  foreignKey: 'roles_id',
+  otherKey: 'user_id'
+});
+db.user.belongsToMany(db.role, {
+  through: db.userRoles,
+  foreignKey: 'user_id',
+  otherKey: 'roles_id'
+});
+
+db.refreshToken.belongsTo(db.user, {
+  foreignKey: 'userId', targetKey: 'id'
+});
+db.user.hasOne(db.refreshToken, {
+  foreignKey: 'userId', targetKey: 'id'
+});
+
 module.exports = db;
