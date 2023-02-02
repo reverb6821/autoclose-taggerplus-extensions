@@ -6,6 +6,12 @@
   "repository": "https://github.com/reverb6821/todo-app",
   "author": "Giuseppe Gigliotti",
   "license": "MIT",
+  "scripts": {
+    "db:migrate":"yarn sequelize-cli db:migrate",
+    "db:migrate:undo":"yarn sequelize-cli db:migrate:undo",
+    "db:seed:all":"yarn sequelize-cli db:seed:all",
+    "db:seed:undo":"yarn sequelize-cli db:seed:undo"
+  },
   "devDependencies": {
     "sequelize-cli": "^6.6.0"
   },
