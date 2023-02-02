@@ -1,6 +1,10 @@
-const db = require("../models");
-const config = require("../config/jwt.config");
-const { user: User, role: Role, refreshToken: RefreshToken } = db;
+const db = require('../models');
+const config = require('../config/jwt.config');
+const { 
+  user: User, 
+  role: Role, 
+  refreshToken: RefreshToken
+} = db;
 
 const Op = db.Sequelize.Op;
 

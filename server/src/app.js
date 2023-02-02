@@ -7,8 +7,10 @@ const morganMiddleware = require('./middleware/morgan')
 const winston = require('./config/winston')
 const port = 3000
 const db = require('./models')
+const Role = db.role;
 const cookieSession = require('cookie-session');
 const Logger = require('./config/winston')
+
 // ? cors
 const corsOptions = {
   origin: 'http://localhost:8081',
@@ -63,6 +65,22 @@ app.get('*', function(req, res){
   )
 });
 
+function initial() {
+  Role.create({
+    id: 1,
+    name: "user"
+  });
+ 
+  Role.create({
+    id: 2,
+    name: "moderator"
+  });
+ 
+  Role.create({
+    id: 3,
+    name: "admin"
+  });
+}
 
 //* app routes
 require('./routes/auth.routes')(app)
@@ -73,16 +91,19 @@ app.get('/', function (req, res) {
 })
 
 db.sequelize.sync()
-  .then(() => {
-    Logger.info('Synced db.')
-  })
+.then(() => {
+  Logger.info('Sequelize init...')
+  Logger.info('Database Synced Correctly')
+ })
   .catch((err) => {
     Logger.error(`Failed to sync db: ${err.message}`)
   });
 
+  
 app.use(function (err, req, res, next) {
   winston.error(`${req.method} - ${err.message}  - ${req.originalUrl} - ${req.ip}`)
   next(err)
 })
 
 app.listen(port, () => winston.info(`listening at port ${port}`))
+
