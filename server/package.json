@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "webserver for todo app",
+  "main": "./src/app.js",
+  "repository": "https://github.com/reverb6821/todo-app",
+  "author": "Giuseppe Gigliotti",
+  "license": "MIT",
+  "devDependencies": {
+    "sequelize-cli": "^6.6.0"
+  },
+  "dependencies": {
+    "sequelize": "^6.28.0",
+    "sqlite3": "^5.1.4"
+  }
+}
