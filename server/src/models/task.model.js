@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Task.init({
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
-    },
+    // id: {
+    //   type: DataTypes.INTEGER,
+    //   primaryKey: true
+    // },
     title: DataTypes.STRING,
     date: DataTypes.DATE,
     description: DataTypes.STRING,

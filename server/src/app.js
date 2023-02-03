@@ -46,6 +46,23 @@ app.use('/logger', (_, res) => {
   winston.debug('DEBUG : ')
 })
 
+function initial() {
+  Role.create({
+    id: 1,
+    name: 'user'
+  });
+ 
+  Role.create({
+    id: 2,
+    name: 'moderator'
+  });
+ 
+  Role.create({
+    id: 3,
+    name: 'admin'
+  });
+}
+
 //* simple route
 app.get('/', (req, res) => {
   res.json(
@@ -56,39 +73,24 @@ app.get('/', (req, res) => {
   )
 })
 
-app.get('*', function(req, res){
-  res.json(
-    { 
-      message: 'Welcome to TODOapp.',
-      error: 404, 
-    }
-  )
+app.get('/api/v1/healthchecker', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'Build CRUD API with Node.js and Sequelize',
+  });
 });
-
-function initial() {
-  Role.create({
-    id: 1,
-    name: "user"
-  });
- 
-  Role.create({
-    id: 2,
-    name: "moderator"
-  });
- 
-  Role.create({
-    id: 3,
-    name: "admin"
-  });
-}
 
 //* app routes
 require('./routes/auth.routes')(app)
 require('./routes/user.routes')(app)
+require('./routes/task.routes')(app)
 
-app.get('/', function (req, res) {
-  throw new Error('error thrown navigating to')
-})
+app.get('*', function(req, res){
+  res.status(404).json({
+      status: 'Endpoint not found',
+      message: '..What?!'
+    })
+});
 
 db.sequelize.sync()
 .then(() => {
