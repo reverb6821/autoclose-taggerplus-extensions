@@ -1,0 +1,13 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:reverb6821/todo-app.git",
+  "author": "reverb6821 <giuseppegigliottidev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "neu:dev": "neu run ",
+    "neu:prod": "neu build",
+    "neu:update": "neu update"
+  }
+}
