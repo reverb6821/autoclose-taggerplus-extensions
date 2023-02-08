@@ -1,30 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import { DragDropContext, DropResult } from 'react-beautiful-dnd'
+import { useDispatch, useSelector } from 'react-redux'
+import { ToDoColumn } from './components/ToDo'
+import { DoneColumn } from './components/Done'
+import { InProgressColumn } from './components/InProgress'
+import { todoSlice as todo } from './store/slices/todo'
+import { inProgressSlice as inProgress } from './store/slices/inProgress'
+import { doneSlice as done } from './store/slices/done'
+import { StoreState } from './store/store'
+import { IModel } from './interfaces/index'
+
+type TAllSilces = 'todo' | 'inProgress' | 'done';
 
 function App () {
-  const [count, setCount] = useState(0)
+  const dispatch = useDispatch()
+  const appState = useSelector((state: StoreState) => state)
+
+  const onDragEnd = (result: DropResult) => {
+    if (!result.destination) {
+      return
+    }
+
+    const { destination, source, draggableId } = result
+    const allSlices = { todo, inProgress, done }
+
+    if (destination.droppableId === source.droppableId) {
+      dispatch(
+        allSlices[destination.droppableId as TAllSilces].actions.reorder(result)
+      )
+    } else {
+      const [filterState] = (
+        (appState as any)[source.droppableId] as IModel[]
+      ).filter(({ id }) => id === draggableId)
+
+      dispatch(
+        allSlices[source.droppableId as TAllSilces].actions.remove(draggableId)
+      )
+      dispatch(
+        allSlices[destination.droppableId as TAllSilces].actions.update({
+          ...result,
+          filterState
+        })
+      )
+    }
+  }
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-
-    </div>
+    <>
+    <Container>
+      <Typography textAlign='center' variant='h3' mt={3} mb={5}>
+        This is a ToDo APP with Redux
+      </Typography>{' '}
+      <Grid container spacing={3} justifyContent='center'>
+        <DragDropContext onDragEnd={(res) => onDragEnd(res)}>
+          <Grid item md={4}>
+            <ToDoColumn />
+          </Grid>
+          <Grid item md={4}>
+            <InProgressColumn />
+          </Grid>
+          <Grid item md={4}>
+            <DoneColumn />
+          </Grid>
+        </DragDropContext>
+      </Grid>
+    </Container>
+    </>
   )
 }
 
