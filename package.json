@@ -1,13 +1,45 @@
 {
-  "name": "todo-app",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:reverb6821/todo-app.git",
-  "author": "reverb6821 <giuseppegigliottidev@gmail.com>",
-  "license": "MIT",
-  "scripts": {
-    "neu:dev": "neu run ",
-    "neu:prod": "neu build",
-    "neu:update": "neu update"
-  }
+  "name": "autotagger",
+  "displayName": "AutoTagger",
+  "description": "Automatically closes HTML, XML, JSX, Vue, and Android layout tags in VS Code.",
+  "version": "0.0.1",
+  "publisher": "Giuseppe Gigliotti",
+  "icon": "",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reverb6821/autotagger-extensions.git"
+  },
+  "activationEvents": [
+    "onLanguage:html",
+    "onLanguage:xml",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact",
+    "onLanguage:vue",
+    "onLanguage:xaml",
+    "onLanguage:svelte",
+    "onLanguage:astro",
+    "onLanguage:json"
+  ],
+  "main": "./index.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "AutoTagger Settings",
+      "properties": {
+        "autocloseTagsPlus.insertOnNewLine": {
+          "type": "boolean",
+          "default": true,
+          "description": "Insert closing tag on a new line with indentation."
+        }
+      }
+    }
+  },
+  "categories": [
+    "Other"
+  ],
+  "scripts": {},
+  "dependencies": {}
 }
