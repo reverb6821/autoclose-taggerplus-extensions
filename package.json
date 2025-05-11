@@ -1,33 +1,18 @@
 {
-  "name": "autotagger",
-  "displayName": "AutoTagger",
-  "description": "Automatically closes HTML, XML, JSX, Vue, and Android layout tags in VS Code.",
-  "version": "0.0.1",
+  "name": "autoclose-tags-plus",
+  "displayName": "AutoClose Tags+",
+  "description": "An extension that automatically closes tags with configurable indentation.",
+  "version": "1.0.0",
   "publisher": "Giuseppe Gigliotti",
-  "icon": "",
   "engines": {
-    "vscode": "^1.70.0"
+    "vscode": "^1.50.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/reverb6821/autotagger-extensions.git"
-  },
-  "activationEvents": [
-    "onLanguage:html",
-    "onLanguage:xml",
-    "onLanguage:javascriptreact",
-    "onLanguage:typescriptreact",
-    "onLanguage:vue",
-    "onLanguage:xaml",
-    "onLanguage:svelte",
-    "onLanguage:astro",
-    "onLanguage:json"
-  ],
-  "main": "./index.js",
+  "main": "./extension.js",
+  "categories": ["Other"],
+  "activationEvents": ["onLanguage:html", "onLanguage:xml", "onLanguage:javascriptreact", "onLanguage:typescriptreact", "onLanguage:svelte", "onLanguage:xaml", "onLanguage:astro", "onLanguage:json"],
   "contributes": {
     "configuration": {
-      "type": "object",
-      "title": "AutoTagger Settings",
+      "title": "AutoClose Tags+",
       "properties": {
         "autocloseTagsPlus.insertOnNewLine": {
           "type": "boolean",
@@ -37,9 +22,11 @@
       }
     }
   },
-  "categories": [
-    "Other"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/autoclose-tags-plus.git"
+  },
   "scripts": {},
-  "dependencies": {}
+  "devDependencies": {},
+  "license": "MIT"
 }

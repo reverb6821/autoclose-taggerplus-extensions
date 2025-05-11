@@ -1,4 +1,4 @@
-# Auto Tagger
+# AutoClose Tags+
 
 A Visual Studio Code extension that automatically closes HTML, XML, JSX, and Vue tags as you type.
 
@@ -36,18 +36,6 @@ A Visual Studio Code extension that automatically closes HTML, XML, JSX, and Vue
 ## 🔧 Requirements
 
 - Visual Studio Code version `^1.70.0` or higher.
-
-## 📋 Settings
-
-You can control the behavior of the closing tags with the `AutoTagger` settings.
-
-### insertOnNewLine
-
-- **Type**: `boolean`
-- **Default**: `true`
-- **Description**: If set to `true`, closing tags will be inserted on a new line with indentation. If set to `false`, they will be inserted on the same line.
-
-To configure this setting, go to **File > Preferences > Settings**, search for `AutoClose Tags+`, and toggle the `insertOnNewLine` setting.
 
 ## 📦 Install from VSIX
 
