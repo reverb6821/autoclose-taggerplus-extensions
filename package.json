@@ -1,15 +1,28 @@
 {
   "name": "autoclose-tags-plus",
   "displayName": "AutoClose Tags+",
-  "description": "An extension that automatically closes tags with configurable indentation.",
+  "description": "An extension that automatically closes HTML-like tags and CSS/SCSS/LESS braces with smart behavior and indentation.",
   "version": "1.0.0",
   "publisher": "Giuseppe Gigliotti",
   "engines": {
     "vscode": "^1.50.0"
   },
   "main": "./extension.js",
+  "icon": "icon.png",
   "categories": ["Other"],
-  "activationEvents": ["onLanguage:html", "onLanguage:xml", "onLanguage:javascriptreact", "onLanguage:typescriptreact", "onLanguage:svelte", "onLanguage:xaml", "onLanguage:astro", "onLanguage:json"],
+  "activationEvents": [
+    "onLanguage:html",
+    "onLanguage:xml",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact",
+    "onLanguage:svelte",
+    "onLanguage:xaml",
+    "onLanguage:astro",
+    "onLanguage:json",
+    "onLanguage:css",
+    "onLanguage:scss",
+    "onLanguage:less"
+  ],
   "contributes": {
     "configuration": {
       "title": "AutoClose Tags+",
@@ -18,9 +31,21 @@
           "type": "boolean",
           "default": true,
           "description": "Insert closing tag on a new line with indentation."
+        },
+        "autoCloseTags.excludedTags": {
+          "type": "array",
+          "default": ["MyComponent", "Fragment"],
+          "description": "List of tag names that should not be auto-closed."
         }
       }
-    }
+    },
+    "keybindings": [
+      {
+        "command": "extension.insertClosingTag",
+        "key": "ctrl+alt+.",
+        "when": "editorTextFocus"
+      }
+    ]
   },
   "repository": {
     "type": "git",

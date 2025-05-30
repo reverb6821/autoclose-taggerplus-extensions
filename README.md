@@ -1,44 +1,87 @@
 # AutoClose Tags+
 
-A Visual Studio Code extension that automatically closes HTML, XML, JSX, and Vue tags as you type.
+A lightweight and smart Visual Studio Code extension that **automatically inserts closing HTML-like tags** and **CSS/SCSS/LESS code blocks**.
+
+---
 
 ## ✨ Features
 
-- When you type an opening tag like `<div>`, it automatically inserts the corresponding closing tag `</div>`.
-- Supports HTML, XML, React (JSX/TSX), and Vue.
-- Ignores self-closing tags such as `<input />`, `<img />`, etc.
+### ✅ Auto-Close HTML/JSX/Template Tags
+- Automatically inserts closing tags when typing `>` after an opening tag.
+- Cursor is placed between the opening and closing tag.
+- Works with:
+  - HTML
+  - Vue
+  - Astro
+  - React (JSX/TSX)
+- Skips self-closing tags like `<img />`, `<input />`, etc.
+- Skips custom tags specified in settings.
 
-## 🧠 Supported Languages
+### ✅ Auto-Close CSS/SCSS/LESS Braces
+- Automatically inserts closing `}` with proper indentation after typing `{`.
+- Cursor is placed inside the block:
+  ```css
+  .selector {
+      |   ← cursor here
+  }
+  ```
 
-- HTML
-- XML (including Android layout XML)
-- JavaScript React (JSX)
-- TypeScript React (TSX)
-- Vue
-- XAML (for Xamarin and WPF)
-- Svelte
-- Astro
-- JSON
+### ✅ Manual Closing Tag Command
+- Command Palette: `Insert Closing Tag`
+- Keybinding: `Ctrl + Alt + .`
 
-## 🚀 How It Works
+---
 
-1. Install the extension (from VSIX or Marketplace).
-2. Start typing an opening tag like `<section>`.
-3. As soon as you type `>`, the matching `</section>` is inserted automatically.
+## ⚙️ Configuration
 
-## ✨ Features
+You can customize excluded tags in your `settings.json`:
 
-- **Context-Aware**: The extension checks if a closing tag already exists in the document before adding it.
-- **Nested Tag Handling**: If your cursor is inside a nested tag, the extension ensures that only the appropriate closing tag is inserted.
-- **Avoid Duplicate Closing Tags**: If a closing tag for the current tag is already present in the document, it will not be inserted again.
-
-
-## 🔧 Requirements
-
-- Visual Studio Code version `^1.70.0` or higher.
-
-## 📦 Install from VSIX
-
-```bash
-code --install-extension autoclose-tags-0.0.1.vsix
+```json
+"autoCloseTags.excludedTags": [
+  "MyComponent",
+  "Fragment"
+]
 ```
+---
+
+## 🧠 Language Support
+
+| Language         | Tag Auto-Close | Brace Auto-Close |
+|------------------|----------------|------------------|
+| HTML             | ✅              | ❌               |
+| Vue              | ✅              | ❌               |
+| Astro            | ✅              | ❌               |
+| JavaScript (JSX) | ✅              | ❌               |
+| TypeScript (TSX) | ✅              | ❌               |
+| CSS              | ❌              | ✅               |
+| SCSS             | ❌              | ✅               |
+| LESS             | ❌              | ✅               |
+
+---
+
+## 🚀 Usage
+
+1. Open any supported file (e.g. `.html`, `.jsx`, `.css`, etc.).
+2. Type an opening tag like `<div>` → closing `</div>` is inserted automatically.
+3. Type `{` in a `.css/.scss/.less` file → block with closing brace is inserted.
+
+---
+
+## 📦 Installation
+
+1. Clone this repo
+2. Run `vsce package` (requires [`vsce`](https://code.visualstudio.com/api/working-with-extensions/publishing-extension))
+3. Install `.vsix` file via VS Code:  
+   `Extensions → ... → Install from VSIX...`
+
+---
+
+## 🙌 Contribute
+
+Pull requests and suggestions are welcome!
+
+---
+
+## 📝 License
+
+MIT
